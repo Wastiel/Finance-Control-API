@@ -1,6 +1,7 @@
 package com.gerenciamento.financas.api.controller;
 
 import com.gerenciamento.financas.api.dto.ContaDetail;
+import com.gerenciamento.financas.api.form.ContaForm;
 import com.gerenciamento.financas.api.mapper.ContaMapper;
 import com.gerenciamento.financas.domain.model.entity.Conta;
 import com.gerenciamento.financas.domain.model.service.ContaService;
@@ -30,19 +31,18 @@ public class ContaController {
         return ResponseEntity.ok(contaDetails);
     }
     @PostMapping
-    public ResponseEntity<ContaDetail> create(@RequestBody @Valid Conta conta){
-        ContaDetail contaDetail = contaMapper.toContaDetail(contaService.create(conta));
+    public ResponseEntity<ContaDetail> create(@RequestBody @Valid ContaForm contaForm){
+        ContaDetail contaDetail = contaMapper.toContaDetail(contaService.create(contaMapper.toConta(contaForm)));
         return ResponseEntity.ok(contaDetail);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Conta> update(@PathVariable long id, @RequestBody Conta conta){
-        return ResponseEntity.ok(contaService.update(id, conta));
+    public ResponseEntity<ContaDetail> update(@PathVariable long id, @RequestBody ContaForm contaForm){
+        return ResponseEntity.ok(contaMapper.toContaDetail(contaService.update(id, contaMapper.toConta(contaForm))));
     }
     @PutMapping("/{id}/changeStatus")
-    public ResponseEntity<Conta> changeStatusConta(@PathVariable long id, @RequestBody Conta conta){
-        return ResponseEntity.ok(contaService.changeStatusConta(id, conta));
+    public ResponseEntity<ContaDetail> changeStatusConta(@PathVariable long id, @RequestBody ContaForm contaForm){
+        return ResponseEntity.ok(contaMapper.toContaDetail(contaService.changeStatusConta(id, contaMapper.toConta(contaForm))));
     }
-
     @PutMapping("/{id}/atualizaSaldo")
     public ResponseEntity atualizaSaldo(@PathVariable long id){
         return ResponseEntity.ok(contaService.atualizaSaldo(id));

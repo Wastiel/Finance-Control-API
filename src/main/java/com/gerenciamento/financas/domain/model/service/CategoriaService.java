@@ -14,7 +14,6 @@ import java.util.List;
 public class CategoriaService {
 
     private final CategoriaRepository categoriaRepository;
-
     public List<Categoria> findAll(){
         return categoriaRepository.findAll();
     }

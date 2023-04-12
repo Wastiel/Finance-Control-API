@@ -1,6 +1,7 @@
 package com.gerenciamento.financas.api.controller;
 
 import com.gerenciamento.financas.api.dto.CategoriaDetail;
+import com.gerenciamento.financas.api.form.CategoriaForm;
 import com.gerenciamento.financas.api.mapper.CategoriaMapper;
 import com.gerenciamento.financas.domain.model.entity.Categoria;
 import com.gerenciamento.financas.domain.model.service.CategoriaService;
@@ -29,20 +30,19 @@ public class CategoriaController {
         CategoriaDetail categoriaDetails = categoriaMapper.toCategoriaDetail(categoriaService.findById(id));
         return ResponseEntity.ok(categoriaDetails);
     }
-
     @PostMapping
-    public ResponseEntity<CategoriaDetail> create(@Valid @RequestBody CategoriaDetail categoriaDetail){
+    public ResponseEntity<CategoriaDetail> create(@Valid @RequestBody CategoriaForm categoriaForm){
         //categoria from o que vai entrar, o que precisa passar para criar objetvo.
         //Recebo Categoria Mapper
-        CategoriaDetail categoriaDetails = categoriaMapper.toCategoriaDetail(categoriaService.create(categoriaMapper.toCategoria(categoriaDetail)));
+        CategoriaDetail categoriaDetails = categoriaMapper.toCategoriaDetail(categoriaService.create(categoriaMapper.toCategoria(categoriaForm)));
         return ResponseEntity.ok(categoriaDetails);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Categoria> update(@PathVariable Long id, @RequestBody Categoria categoria){
-        return ResponseEntity.ok(categoriaService.update(id, categoria));
+    public ResponseEntity<CategoriaDetail> update(@PathVariable Long id, @RequestBody CategoriaForm categoriaForm){
+        return ResponseEntity.ok(categoriaMapper.toCategoriaDetail(categoriaService.update(id, categoriaMapper.toCategoria(categoriaForm))));
     }
     @PutMapping("/{id}/changeStatus")
-    public ResponseEntity<Categoria> changeStatusCategoria(@PathVariable Long id, @RequestBody Categoria categoria){
-        return ResponseEntity.ok(categoriaService.changeStatusCategoria(id, categoria));
+    public ResponseEntity<CategoriaDetail> changeStatusCategoria(@PathVariable Long id, @RequestBody Categoria categoria){
+        return ResponseEntity.ok(categoriaMapper.toCategoriaDetail(categoriaService.changeStatusCategoria(id, categoria)));
     }
 }

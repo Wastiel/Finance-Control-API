@@ -1,6 +1,7 @@
 package com.gerenciamento.financas.api.controller;
 
 import com.gerenciamento.financas.api.dto.TransacaoDetail;
+import com.gerenciamento.financas.api.form.TransacaoForm;
 import com.gerenciamento.financas.api.mapper.TransacaoMapper;
 import com.gerenciamento.financas.domain.model.entity.Transacao;
 import com.gerenciamento.financas.domain.model.service.TransacaoService;
@@ -36,8 +37,8 @@ public class TransacaoController {
         return ResponseEntity.ok(transacaoDetail);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Transacao> update(@PathVariable long id, @RequestBody Transacao transacao){
-        return ResponseEntity.ok(transacaoService.update(id, transacao));
+    public ResponseEntity<TransacaoDetail> update(@PathVariable long id, @RequestBody TransacaoForm transacaoForm){
+        return ResponseEntity.ok(transacaoMapper.toTransacaoDetail(transacaoService.update(id, transacaoMapper.toTransacao(transacaoForm))));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable long id){
