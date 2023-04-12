@@ -1,7 +1,9 @@
 package com.gerenciamento.financas.api.mapper;
 
 import com.gerenciamento.financas.api.dto.TransacaoDetail;
+import com.gerenciamento.financas.api.form.TransacaoForm;
 import com.gerenciamento.financas.domain.model.entity.Transacao;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.processing.Generated;
@@ -9,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-04-12T06:04:09-0300",
+    date = "2023-04-12T06:43:55-0300",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.1.jar, environment: Java 17.0.6 (Amazon.com Inc.)"
 )
 @Component
@@ -47,5 +49,41 @@ public class TransacaoMapperImpl implements TransacaoMapper {
         }
 
         return list;
+    }
+
+    @Override
+    public Transacao toTransacao(TransacaoDetail transacaoDetail) {
+        if ( transacaoDetail == null ) {
+            return null;
+        }
+
+        Transacao transacao = new Transacao();
+
+        transacao.setValor( BigDecimal.valueOf( transacaoDetail.getValor() ) );
+        transacao.setData( transacaoDetail.getData() );
+        transacao.setDescricao( transacaoDetail.getDescricao() );
+        transacao.setConta( transacaoDetail.getConta() );
+        transacao.setCategoria( transacaoDetail.getCategoria() );
+        transacao.setTipoTransacao( transacaoDetail.getTipoTransacao() );
+
+        return transacao;
+    }
+
+    @Override
+    public Transacao toTransacao(TransacaoForm transacaoForm) {
+        if ( transacaoForm == null ) {
+            return null;
+        }
+
+        Transacao transacao = new Transacao();
+
+        transacao.setValor( BigDecimal.valueOf( transacaoForm.getValor() ) );
+        transacao.setData( transacaoForm.getData() );
+        transacao.setDescricao( transacaoForm.getDescricao() );
+        transacao.setConta( transacaoForm.getConta() );
+        transacao.setCategoria( transacaoForm.getCategoria() );
+        transacao.setTipoTransacao( transacaoForm.getTipoTransacao() );
+
+        return transacao;
     }
 }

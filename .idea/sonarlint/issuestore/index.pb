@@ -1,6 +1,4 @@
 
-x
-Hsrc/main/java/com/gerenciamento/financas/api/mapper/TransacaoMapper.java,b\d\bd42ed3152acab8cad583c5128cebc6f053b4870
 7
 HELP.md,1\a\1a273f73b7a477b0745593641bd708a6182c7ad5
 7
@@ -21,11 +19,7 @@ Nsrc/main/java/com/gerenciamento/financas/api/exception/ApiExceptionDetail.java
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
 ‚
 Rsrc/main/java/com/gerenciamento/financas/domain/model/exception/ContaNotFound.java,2\b\2b3b0b0dc2af9fafca9bb7969197a800396835ac
-x
-Hsrc/main/java/com/gerenciamento/financas/api/mapper/CategoriaMapper.java,2\b\2bc41ad16073b1b95c9a51065be4b81a89c3c7ea
 ‰
 Ysrc/main/java/com/gerenciamento/financas/domain/model/repository/CategoriaRepository.java,6\7\67ad1a9c6ce93ad394dd50baaf5d7d51c5f1b0c2
-t
-Dsrc/main/java/com/gerenciamento/financas/api/mapper/ContaMapper.java,4\d\4dbe664677a15e7cf225da5b2b8ade4d3f967d13
 …
 Usrc/main/java/com/gerenciamento/financas/domain/model/repository/ContaRepository.java,4\1\41c7fbb7da766586ff09d07eb1728d7121c8bca6
