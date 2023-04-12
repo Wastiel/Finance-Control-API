@@ -5,18 +5,13 @@ import com.gerenciamento.financas.domain.model.entity.Conta;
 import com.gerenciamento.financas.domain.model.enums.TipoTransacao;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Data
+@Getter
+@Setter
 public class TransacaoForm {
     private double valor;
     private LocalDate data;

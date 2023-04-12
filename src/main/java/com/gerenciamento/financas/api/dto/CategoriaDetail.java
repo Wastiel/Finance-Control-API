@@ -20,7 +20,6 @@ import org.mapstruct.Mapper;
 public class CategoriaDetail {
 
     private long id;
-
     private String descricao;
     @Enumerated(EnumType.STRING)
     private Situacao situacao;

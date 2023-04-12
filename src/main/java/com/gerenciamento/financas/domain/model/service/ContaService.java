@@ -33,19 +33,14 @@ public class ContaService {
         return contaRepository.save(conta);
     }
     public Conta update(long id, Conta conta){
-        Conta contadb = contaRepository.findById(id).orElseThrow(() -> new ContaNotFound("A conta solicitada nao existe"));
-
-        //mappares dentro do domain de conta para conta.
-        contadb.setNome(conta.getNome());
-        contadb.setSaldo(conta.getSaldo());
-        contadb.setSituacao(conta.getSituacao());
-
-        return contaRepository.save(contadb);
+        findById(id);
+        conta.setId(id);
+        return contaRepository.save(conta);
     }
     public Conta changeStatusConta(Long id, Conta conta) {
-        Conta contadb = contaRepository.findById(id).orElseThrow(() ->new CategoriaNotFound("Nao encontrou o id solicitado"));
-        contadb.setSituacao(conta.getSituacao());
-        return contaRepository.save(contadb);
+        //Conta contadb = contaRepository.findById(id).orElseThrow(() ->new CategoriaNotFound("Nao encontrou o id solicitado"));
+        conta.setId(id);
+        return contaRepository.save(conta);
     }
     public Conta atualizaSaldo(long id) {
         // metodo caluclarSaldo ou recalcularSaldo.

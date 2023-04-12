@@ -2,6 +2,7 @@ package com.gerenciamento.financas.domain.model.service;
 
 import com.gerenciamento.financas.api.dto.CategoriaDetail;
 import com.gerenciamento.financas.domain.model.entity.Categoria;
+import com.gerenciamento.financas.domain.model.entity.Transacao;
 import com.gerenciamento.financas.domain.model.exception.CategoriaNotFound;
 import com.gerenciamento.financas.domain.model.repository.CategoriaRepository;
 import lombok.AllArgsConstructor;
@@ -23,17 +24,14 @@ public class CategoriaService {
     public Categoria create(Categoria categoria){
         return categoriaRepository.save(categoria);
     }
-
     public Categoria update(long id, Categoria categoria){
-        Categoria categoriabd = findById(categoria.getId());
-        if(categoria.getDescricao()!=null){
-            categoriabd.setDescricao(categoria.getDescricao());
-        }
-        return categoriaRepository.save(categoriabd);
+        findById(id);
+        categoria.setId(id);
+        return categoriaRepository.save(categoria);
     }
-    public Categoria changeStatusCategoria(Long id,Categoria categoria){
-        Categoria categoriabd = categoriaRepository.findById(id).orElseThrow(() ->new CategoriaNotFound("Nao encontrou o id solicitado"));
-        categoriabd.setSituacao(categoria.getSituacao());
-        return categoriaRepository.save(categoriabd);
+    public Categoria changeStatusCategoria(long id, Categoria categoria){
+        findById(id);
+        categoria.setId(id);
+        return categoriaRepository.save(categoria);
     }
 }
