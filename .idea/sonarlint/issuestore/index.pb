@@ -13,8 +13,6 @@ Isrc/main/java/com/gerenciamento/financas/domain/model/enums/Situacao.java,5\c\
 Vsrc/main/java/com/gerenciamento/financas/domain/model/exception/TransacaoNotFound.java,b\b\bb97700ce9055af927a24250c9ab5f3504a1913c
 †
 Vsrc/main/java/com/gerenciamento/financas/domain/model/exception/CategoriaNotFound.java,9\4\940456a3ebd75a1bb93888ebf845f3ea8c550531
-~
-Nsrc/main/java/com/gerenciamento/financas/api/exception/ApiExceptionDetail.java,9\7\972c4a87b2f795821fe9c90298d0324e435eb7d3
 ?
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
 ‚

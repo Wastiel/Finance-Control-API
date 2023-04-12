@@ -5,10 +5,8 @@ import com.gerenciamento.financas.api.form.CategoriaForm;
 import com.gerenciamento.financas.api.mapper.CategoriaMapper;
 import com.gerenciamento.financas.domain.model.entity.Categoria;
 import com.gerenciamento.financas.domain.model.service.CategoriaService;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,18 +29,19 @@ public class CategoriaController {
         return ResponseEntity.ok(categoriaDetails);
     }
     @PostMapping
-    public ResponseEntity<CategoriaDetail> create(@Valid @RequestBody CategoriaForm categoriaForm){
+    public ResponseEntity<CategoriaDetail> create(@RequestBody CategoriaForm categoriaForm){
         //categoria from o que vai entrar, o que precisa passar para criar objetvo.
         //Recebo Categoria Mapper
         CategoriaDetail categoriaDetails = categoriaMapper.toCategoriaDetail(categoriaService.create(categoriaMapper.toCategoria(categoriaForm)));
         return ResponseEntity.ok(categoriaDetails);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<CategoriaDetail> update(@PathVariable Long id, @RequestBody CategoriaForm categoriaForm){
+    public ResponseEntity<CategoriaDetail> update(@PathVariable long id, @RequestBody CategoriaForm categoriaForm){
         return ResponseEntity.ok(categoriaMapper.toCategoriaDetail(categoriaService.update(id, categoriaMapper.toCategoria(categoriaForm))));
     }
     @PutMapping("/{id}/changeStatus")
-    public ResponseEntity<CategoriaDetail> changeStatusCategoria(@PathVariable Long id, @RequestBody Categoria categoria){
-        return ResponseEntity.ok(categoriaMapper.toCategoriaDetail(categoriaService.changeStatusCategoria(id, categoria)));
+    public ResponseEntity<CategoriaDetail> changeStatusCategoria(@PathVariable long id, @RequestBody CategoriaForm categoriaForm){
+        return ResponseEntity.ok(categoriaMapper.toCategoriaDetail(categoriaService.changeStatusCategoria(id, categoriaMapper.toCategoria(categoriaForm))));
     }
+ 
 }

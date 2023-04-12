@@ -4,16 +4,11 @@ import com.gerenciamento.financas.domain.model.enums.Situacao;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Data
+@Getter
+@Setter
 public class ContaForm {
     private long id;
     private String nome;

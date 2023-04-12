@@ -30,7 +30,8 @@ public class TransacaoService {
     }
     public Transacao update(long id, Transacao transacao){
         Transacao transacaodb = transacaoRepository.findById(id).orElseThrow(() -> new TransacaoNotFound("A transacao solicitada nao existe."));
-        return transacaoRepository.save(transacaodb);
+        transacao.setId(id);
+        return transacaoRepository.save(transacao);
     }
     public void delete(Long id){
         Transacao transacaodb = transacaoRepository.findById(id).orElseThrow(() -> new TransacaoNotFound("A transacao solicitada nao existe."));
