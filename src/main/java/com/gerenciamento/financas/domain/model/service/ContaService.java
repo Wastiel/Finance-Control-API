@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Component
+
 @AllArgsConstructor
 @Service
 public class ContaService {
@@ -37,27 +37,14 @@ public class ContaService {
         conta.setId(id);
         return contaRepository.save(conta);
     }
-    public Conta changeStatusConta(Long id, Conta conta) {
+    /*public Conta changeStatusConta(Long id, Conta conta) {
         //Conta contadb = contaRepository.findById(id).orElseThrow(() ->new CategoriaNotFound("Nao encontrou o id solicitado"));
         conta.setId(id);
         return contaRepository.save(conta);
-    }
-    public Conta atualizaSaldo(long id) {
+    }*/
+    public Conta calcularSaldo(long id) {
         // metodo caluclarSaldo ou recalcularSaldo.
         Conta contadb = contaRepository.findById(id).orElseThrow(() ->new CategoriaNotFound("Nao encontrou a conta solicitada"));
-        List<Transacao> transcoes = transacaoRepository.findAllbyConta(contadb.getId());
-        //List<Transacao> transcoes2 = transacaoRepository.findAllbyConta(contadb.getId());
-        BigDecimal saldoTotal = BigDecimal.ZERO;
-
-        for(Transacao transacao : transcoes){
-            BigDecimal valor = transacao.getValor();
-            if (transacao.getTipoTransacao() == TipoTransacao.RECEITA) {
-                saldoTotal = saldoTotal.add(valor);
-            } else {
-                saldoTotal = saldoTotal.subtract(valor);
-            }
-        }
-        contadb.setSaldo(saldoTotal);
         return contaRepository.save(contadb);
     }
     public Conta atualizaSaldo(Transacao transacao){
@@ -70,13 +57,13 @@ public class ContaService {
             }
         return contaRepository.save(contadb);
     }
-    @Scheduled(cron = "0 08 22 * * *")
-    public void atualizaSaldoHora() {
+
+    /*public void atualizaSaldoHora() {
         System.out.println("entrou aqui");
         // metodo caluclarSaldo ou recalcularSaldo.
         Conta contadb = contaRepository.findById(52l).orElseThrow(() ->new CategoriaNotFound("Nao encontrou a conta solicitada"));
         contadb.setSaldo(new BigDecimal(666));
-        contaRepository.save(contadb);}
+        contaRepository.save(contadb);}*/
 
 
 }

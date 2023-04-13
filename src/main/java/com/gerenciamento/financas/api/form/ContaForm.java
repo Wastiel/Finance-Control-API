@@ -17,7 +17,7 @@ public class ContaForm {
     private String nome;
     @Digits(integer = 8, fraction = 2, message = "Valor invalido para o campo valor")
     private double saldo;
-    @NotNull()
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Situacao situacao;
 }

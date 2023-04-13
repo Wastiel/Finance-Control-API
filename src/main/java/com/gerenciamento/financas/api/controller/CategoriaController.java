@@ -40,9 +40,6 @@ public class CategoriaController {
     public ResponseEntity<CategoriaDetail> update(@PathVariable long id, @RequestBody @Validated CategoriaForm categoriaForm){
         return ResponseEntity.ok(categoriaMapper.toCategoriaDetail(categoriaService.update(id, categoriaMapper.toCategoria(categoriaForm))));
     }
-    @PutMapping("/{id}/changeStatus")
-    public ResponseEntity<CategoriaDetail> changeStatusCategoria(@PathVariable long id, @RequestBody @Validated CategoriaForm categoriaForm){
-        return ResponseEntity.ok(categoriaMapper.toCategoriaDetail(categoriaService.changeStatusCategoria(id, categoriaMapper.toCategoria(categoriaForm))));
-    }
+
 
 }

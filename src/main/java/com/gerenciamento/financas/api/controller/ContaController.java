@@ -40,13 +40,21 @@ public class ContaController {
     public ResponseEntity<ContaDetail> update(@PathVariable long id, @RequestBody @Validated ContaForm contaForm){
         return ResponseEntity.ok(contaMapper.toContaDetail(contaService.update(id, contaMapper.toConta(contaForm))));
     }
-    @PutMapping("/{id}/changeStatus")
+    /*@PutMapping("/{id}/changeStatus")
     public ResponseEntity<ContaDetail> changeStatusConta(@PathVariable long id, @RequestBody @Validated ContaForm contaForm){
         return ResponseEntity.ok(contaMapper.toContaDetail(contaService.changeStatusConta(id, contaMapper.toConta(contaForm))));
-    }
+    }*/
     @PutMapping("/{id}/atualizaSaldo")
     public ResponseEntity atualizaSaldo(@PathVariable long id){
-        return ResponseEntity.ok(contaService.atualizaSaldo(id));
+        return ResponseEntity.ok(contaService.calcularSaldo(id));
     }
+    @PutMapping("/saldo")
+    public ResponseEntity calcularaSaldoContas(@PathVariable long id){
+        return ResponseEntity.ok(contaService.calcularSaldo(id));
+    }
+    /*@PutMapping("/saldo")
+    public ResponseEntity calcularaSaldoContas(@PathVariable List<id>){
+        return ResponseEntity.ok(contaService.calcularSaldo(List<id>);
+    }*/
 
 }

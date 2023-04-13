@@ -25,4 +25,11 @@ public class Conta {
     @Enumerated(EnumType.STRING)
     private Situacao situacao;
 
+    public void deposit(BigDecimal value) {
+        this.saldo = this.saldo.add(value);
+    }
+    public void withdraw(BigDecimal value) {
+        this.saldo = this.saldo.subtract(value);
+    }
+
 }

@@ -29,7 +29,7 @@ public class TransacaoService {
         return transacaoRepository.save(transacao);
     }
     public Transacao update(long id, Transacao transacao){
-        Transacao transacaodb = transacaoRepository.findById(id).orElseThrow(() -> new TransacaoNotFound("A transacao solicitada nao existe."));
+        findById(id);
         transacao.setId(id);
         return transacaoRepository.save(transacao);
     }
