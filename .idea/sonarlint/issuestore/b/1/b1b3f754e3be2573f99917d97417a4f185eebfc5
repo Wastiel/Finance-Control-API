@@ -1,0 +1,11 @@
+
+p
+java:S1128"URemove this unused import 'com.gerenciamento.financas.domain.model.entity.Categoria'.(Ñ÷Ôàüÿÿÿÿ
+^
+java:S1128"CRemove this unused import 'jakarta.validation.constraints.NotNull'.(Àª•ıÿÿÿÿ
+c
+java:S1128"HRemove this unused import 'org.hibernate.validator.constraints.br.CNPJ'.(½·¿ğûÿÿÿÿ
+]
+java:S1128"GRemove this unused import 'org.hibernate.validator.constraints.br.CPF'.(£ ¦¤
+G
+java:S1128"1Remove this unused import 'org.mapstruct.Mapper'.(¤ãËÔ

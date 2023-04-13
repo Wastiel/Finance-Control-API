@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,16 +32,16 @@ public class ContaController {
         return ResponseEntity.ok(contaDetails);
     }
     @PostMapping
-    public ResponseEntity<ContaDetail> create(@RequestBody @Valid ContaForm contaForm){
+    public ResponseEntity<ContaDetail> create(@RequestBody @Validated ContaForm contaForm){
         ContaDetail contaDetail = contaMapper.toContaDetail(contaService.create(contaMapper.toConta(contaForm)));
         return ResponseEntity.ok(contaDetail);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<ContaDetail> update(@PathVariable long id, @RequestBody ContaForm contaForm){
+    public ResponseEntity<ContaDetail> update(@PathVariable long id, @RequestBody @Validated ContaForm contaForm){
         return ResponseEntity.ok(contaMapper.toContaDetail(contaService.update(id, contaMapper.toConta(contaForm))));
     }
     @PutMapping("/{id}/changeStatus")
-    public ResponseEntity<ContaDetail> changeStatusConta(@PathVariable long id, @RequestBody ContaForm contaForm){
+    public ResponseEntity<ContaDetail> changeStatusConta(@PathVariable long id, @RequestBody @Validated ContaForm contaForm){
         return ResponseEntity.ok(contaMapper.toContaDetail(contaService.changeStatusConta(id, contaMapper.toConta(contaForm))));
     }
     @PutMapping("/{id}/atualizaSaldo")

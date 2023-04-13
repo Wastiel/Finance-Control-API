@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,12 +33,12 @@ public class TransacaoController {
         return ResponseEntity.ok(transacaoDetail);
     }
     @PostMapping
-    public ResponseEntity<TransacaoDetail> create(@RequestBody @Valid Transacao transacao){
+    public ResponseEntity<TransacaoDetail> create(@RequestBody @Validated Transacao transacao){
         TransacaoDetail transacaoDetail = transacaoMapper.toTransacaoDetail(transacaoService.create(transacao));
         return ResponseEntity.ok(transacaoDetail);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<TransacaoDetail> update(@PathVariable long id, @RequestBody TransacaoForm transacaoForm){
+    public ResponseEntity<TransacaoDetail> update(@PathVariable long id, @RequestBody @Validated TransacaoForm transacaoForm){
         return ResponseEntity.ok(transacaoMapper.toTransacaoDetail(transacaoService.update(id, transacaoMapper.toTransacao(transacaoForm))));
     }
     @DeleteMapping("/{id}")
