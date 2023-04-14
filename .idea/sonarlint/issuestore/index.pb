@@ -37,3 +37,11 @@ u
 Esrc/main/java/com/gerenciamento/financas/api/dto/TransacaoDetail.java,e\f\ef696481ecb5fc66e645fcc078a485f11c038507
 x
 Hsrc/main/java/com/gerenciamento/financas/api/mapper/TransacaoMapper.java,b\d\bd42ed3152acab8cad583c5128cebc6f053b4870
+t
+Dsrc/main/java/com/gerenciamento/financas/api/form/CategoriaForm.java,8\8\8870e7b4631eb8b77136cb2b0e7884e520793696
+t
+Dsrc/main/java/com/gerenciamento/financas/api/form/TransacaoForm.java,5\9\593a2f731e0aa7adca27b994330c013ce2438a25
+x
+Hsrc/main/java/com/gerenciamento/financas/api/mapper/CategoriaMapper.java,2\b\2bc41ad16073b1b95c9a51065be4b81a89c3c7ea
+<
+build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35

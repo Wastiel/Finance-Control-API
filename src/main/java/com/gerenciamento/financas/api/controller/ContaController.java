@@ -4,10 +4,12 @@ import com.gerenciamento.financas.api.dto.ContaDetail;
 import com.gerenciamento.financas.api.form.ContaForm;
 import com.gerenciamento.financas.api.mapper.ContaMapper;
 import com.gerenciamento.financas.domain.model.entity.Conta;
+import com.gerenciamento.financas.domain.model.service.CalculaSaldoSerivce;
 import com.gerenciamento.financas.domain.model.service.ContaService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ContaController {
     private ContaService contaService;
+    private CalculaSaldoSerivce calculaSaldoSerivce;
     private ContaMapper contaMapper;
 
     @GetMapping
@@ -40,13 +43,9 @@ public class ContaController {
     public ResponseEntity<ContaDetail> update(@PathVariable long id, @RequestBody @Validated ContaForm contaForm){
         return ResponseEntity.ok(contaMapper.toContaDetail(contaService.update(id, contaMapper.toConta(contaForm))));
     }
-    /*@PutMapping("/{id}/changeStatus")
-    public ResponseEntity<ContaDetail> changeStatusConta(@PathVariable long id, @RequestBody @Validated ContaForm contaForm){
-        return ResponseEntity.ok(contaMapper.toContaDetail(contaService.changeStatusConta(id, contaMapper.toConta(contaForm))));
-    }*/
-    @PutMapping("/{id}/atualizaSaldo")
-    public ResponseEntity atualizaSaldo(@PathVariable long id){
-        return ResponseEntity.ok(contaService.calcularSaldo(id));
+    @PutMapping("/{id}/calculateBalance")
+    public ResponseEntity<ContaDetail> calculateBalance(@PathVariable long id){
+        return ResponseEntity.ok(contaMapper.toContaDetail(calculaSaldoSerivce.calculateBalance(id)));
     }
     @PutMapping("/saldo")
     public ResponseEntity calcularaSaldoContas(@PathVariable long id){

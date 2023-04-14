@@ -19,70 +19,43 @@ public class CalculaSaldoSerivce {
     private final ContaRepository contaRepository;
     private final TransacaoRepository transacaoRepository;
 
-    public Conta atualizarSaldoPorConta(long id) {
-        Conta conta = contaRepository.findById(id)
-                .orElseThrow(() -> new CategoriaNotFound("Nao encontrou a conta solicitada"));
-
+    public Conta calculateBalance(long id) {
+        Conta conta = contaRepository.findById(id).orElseThrow(() -> new CategoriaNotFound("Nao encontrou a conta solicitada"));
         List<Transacao> transacoes = transacaoRepository.findAllbyConta(conta.getId());
 
-        BigDecimal saldoTotal = BigDecimal.ZERO;
+        conta.setSaldo(BigDecimal.ZERO);
 
-        for(Transacao transacao : transacoes){
-            BigDecimal valor = transacao.getValor();
+        for (Transacao transacao : transacoes) {
             if (transacao.getTipoTransacao() == TipoTransacao.RECEITA) {
-                saldoTotal = saldoTotal.add(valor);
+                conta.deposit(transacao.getValor());
             } else {
-                saldoTotal = saldoTotal.subtract(valor);
+                conta.withdraw(transacao.getValor());
             }
         }
-
-        conta.setSaldo(saldoTotal);
-
         return contaRepository.save(conta);
     }
-    public Conta atualizarSaldoPorTransacao(Transacao transacao) {
-        Conta conta = contaRepository.findById(transacao.getConta().getId())
-                .orElseThrow(() -> new CategoriaNotFound("Nao encontrou a conta solicitada"));
-
-        BigDecimal saldoTotal = conta.getSaldo();
-
-        if (transacao.getTipoTransacao() == TipoTransacao.RECEITA) {
-            conta.setSaldo(saldoTotal.add(transacao.getValor()));
-        } else {
-            conta.setSaldo(saldoTotal.subtract(transacao.getValor()));
+    public void calculateAccountsBalance(List<Long> ids) {
+        for(Long id: ids){
+            calculateBalance(id);
         }
-
-        return contaRepository.save(conta);
     }
     @Scheduled(cron = "0 08 22 * * *")
-    public void calcularSaldoDeTodasAsContas() {
+    public void calculateAllAccountsBalance() {
         List<Conta> contas = contaRepository.findAll();
 
         for (Conta conta : contas) {
-            BigDecimal saldoTotal = calcularSaldo(conta);
-
-            conta.setSaldo(saldoTotal);
-
-            contaRepository.save(conta);
+            calculateBalance(conta.getId());
         }
     }
-    private BigDecimal calcularSaldo(Conta conta) {
-        List<Transacao> transacoes = transacaoRepository.findAllbyConta(conta.getId());
-
-        BigDecimal saldoTotal = BigDecimal.ZERO;
-
-        for (Transacao transacao : transacoes) {
-            BigDecimal valor = transacao.getValor();
-
-            if (transacao.getTipoTransacao() == TipoTransacao.RECEITA) {
-                saldoTotal = saldoTotal.add(valor);
-            } else {
-                saldoTotal = saldoTotal.subtract(valor);
-            }
+    /*public BigDecimal updateBalanceByTransaction(Transacao transacao) {
+        if (transacao.getTipoTransacao() == TipoTransacao.RECEITA) {
+            conta.deposit(transacao.getValor());
+        } else {
+            conta.withdraw(transacao.getValor());
         }
+        return conta.getSaldo();
+    }*/
 
-        return saldoTotal;
-    }
 
 
 
